@@ -19,5 +19,30 @@ class HomeController extends Controller
         return $this->view->render($response,'paneladmin.twig');
     }
 
+    public function create(Request $request,Response $response){
+        return $this->view->render($response,'agregarusuarios.twig');
+    }
+
+    public function list(Request $request,Response $response){
+        return $this->view->render($response,'listausuarios.twig');
+    }
+    
+    public function createnovedad(Request $request,Response $response){
+        return $this->view->render($response,'agregarnovedad.twig');
+    }
+
+    public function listnovedad(Request $request,Response $response){
+        return $this->view->render($response,'listanovedad.twig');
+    }
+
+    public function createoferta(Request $request,Response $response){
+        return $this->view->render($response,'agregaoferta.twig');
+    }
+
+    public function listaferta(Request $request,Response $response){
+        return $this->view->render($response,'listaoferta.twig');
+    }
+
+
     
 }

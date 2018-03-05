@@ -28,7 +28,7 @@
         <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
             <div class="navbar-header">
                 <img src="https://firebasestorage.googleapis.com/v0/b/adminapparrobamedellin.appspot.com/o/IMG%2Fic_launcher_icon-web.png?alt=media&token=828c26e5-576d-4c92-97c4-13b296fb76a6" alt="" height="50"width="50">
-                <a>Administrador APP @Medellín, user: </a>
+                <a>Administrador APP @Medellín</a>
                 <!-- -->
             </div>
             <!-- /.navbar-header -->
@@ -41,9 +41,9 @@
                     </a>
                     <ul class="dropdown-menu dropdown-user">
                         <li><a href="#"><i class="fa fa-user fa-fw"></i><b>{{  auth.user.name }}</b></a>
-                        </li>
+                        <!--/li>
                         <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
-                        </li>
+                        </li-->
                         <li class="divider"></li>
                         <li><a  href="{{ path_for('logout') }}"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
                         </li>
@@ -67,54 +67,60 @@
                                 </span>
                             </div>
                             <!-- /input-group -->
-
-
-
                         </li>
                         <li>
-                            <a href="#"><i class="fa fa-dashboard fa-fw"></i>home</a>
+                            <a href="/admin"><i class="fa fa-dashboard fa-fw"></i>home</a>
                         </li>
+
+                        {% if auth.check %}
+                        {% if auth.user.rol_id == 1 %}
                         
                         <li>
                             <a href="#"><i class="fa fa-user fa-fw"></i>Usuarios<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a ><i class="fa fa-plus fa-fw"></i>Agregar usuario</a>
+                                    <a href="{{ path_for('usuario.create') }}"><i class="fa fa-plus fa-fw"></i>Agregar usuario</a>
                                 </li>
                                 <li>
-                                    <a ><i class="fa fa-th-list  s fa-fw"></i>Ver usuarios</a>
+                                    <a href="{{ path_for('usuario.list') }}"><i class="fa fa-th-list  s fa-fw"></i>Ver usuarios</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
 
+                       {% endif %}
+                       {% endif %}
 
-
-                        
                         <li>
                             <a href="#"><i class="fa  fa-tags fa-fw"></i>Novedades<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                               <li>
-                                  <a ><i class="fa fa-plus fa-fw"></i>Agregar novedad</a>
+                                  <a href="{{ path_for('usuario.createnovedad') }}"><i class="fa fa-plus fa-fw"></i>Agregar novedad</a>
                               </li>
                               <li>
-                                  <a ><i class="fa fa-th-list  s fa-fw"></i>Ver Novedades</a>
+                                  <a href="{{ path_for('usuario.listnovedad') }}"><i class="fa fa-th-list  s fa-fw"></i>Ver Novedades</a>
                               </li>
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
+
+                        {% if auth.check %}
+                        {% if auth.user.rol_id == 1 %}
                         <li>
                             <a href="#"><i class="fa fa-book fa-fw"></i>Ofertas academicas<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                               <li>
-                                  <a ><i class="fa fa-plus fa-fw"></i>Agregar oferta</a>
+                                  <a href="{{ path_for('usuario.createoferta') }}"><i class="fa fa-plus fa-fw"></i>Agregar oferta</a>
                               </li>
                               <li>
-                                  <a ><i class="fa fa-th-list  s fa-fw"></i>Ver ofertas</a>
+                                  <a href="{{ path_for('usuario.listaferta') }}"><i class="fa fa-th-list  s fa-fw"></i>Ver ofertas</a>
                               </li>
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
+                        {% endif %}
+                        {% endif %}
+
                         <li class="active">
                             <a href="#"><i class="fa fa-wrench fa-fw"></i>Configuraciones<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
