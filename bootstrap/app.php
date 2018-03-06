@@ -7,6 +7,8 @@ use Slim\Flash\Messages;
 use Slim\Views\Twig;
 use Slim\Views\TwigExtension;
 use App\Controllers\AuthController;
+use App\Controllers\UserController;
+use App\Controllers\NovedadController;
 use App\Controllers\HomeController;
 use App\Validation\Validator;
 use App\Middleware\ValidationErrorsMiddleware;
@@ -88,7 +90,13 @@ $container['AuthController'] = function($container) {
     return new AuthController($container);
 };
 
+$container['UserController'] = function($container) {
+    return new UserController($container);
+};
 
+$container['NovedadController'] = function($container) {
+    return new NovedadController($container);
+};
 
 
 v::with("App\\Validation\\Rules\\");
