@@ -15,7 +15,7 @@
             <div class="control-group form-group">
               <div class="controls">
                 <label>resumen:</label>
-                <input type="tel" class="form-control" name="resumen" id="email" />
+                <input type="tel" class="form-control" name="resumen" id="email" maxlength="100" placeholder="100 caracteres" />
               </div>
             </div> 
             <div class="control-group form-group">
@@ -39,15 +39,15 @@
             <div class="control-group form-group">
               <div class="controls">
                 <label>Contenido:</label>
-                <textarea  name="contenido" rows="10" cols="1000" class="form-control" id="message" maxlength="999" style="resize:none"></textarea>
+                <textarea  name="contenido" rows="10" cols="1000" class="form-control" id="message" maxlength="9999" style="resize:none"></textarea>
               </div>
             </div>
-           
+            <div class="form-group">
             <input type="file" name="imagen" id="imagen" />
-  
+            </div>
             <div id="success"></div>
             <!-- For success/fail messages -->
-            <button>Guardar</button>
+            <button type="submit" class="btn btn-primary" id="sendMessageButton">Guardar</button>
           </form>
         </div>
 

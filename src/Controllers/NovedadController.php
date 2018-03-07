@@ -36,7 +36,7 @@ class NovedadController extends Controller
         // @TODO refactorizar
         $this->flash->addMessage("info", "Usted ha sido registrado");
 
-        return $response->withRedirect($this->router->pathFor("novedad.insertar"));
+        return $response->withRedirect($this->router->pathFor("usuario.listnovedad"));
     }
 
     
