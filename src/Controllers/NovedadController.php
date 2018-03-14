@@ -34,11 +34,19 @@ class NovedadController extends Controller
             "tipo_novedad" => $request->getParam("tipo_novedad")
         ]);
         // @TODO refactorizar
-        $this->flash->addMessage("info", "Usted ha sido registrado");
+        $this->flash->addMessage("info", "Novedad registrada");
 
         return $response->withRedirect($this->router->pathFor("usuario.listnovedad"));
     }
 
+    public function getAll(Request $request,Response $response)
+    {
+        $novedades = Novedades::all()->toArray();
+        $nResponse =$response->withHeader('Content-type', 'application/json')
+                            ->withJson($novedades, 201);
+        return $nResponse;
+    }
+ 
     
 
 }

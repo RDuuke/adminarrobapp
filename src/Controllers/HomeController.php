@@ -4,6 +4,10 @@ namespace App\Controllers;
 
 use Slim\Http\Request;
 use Slim\Http\Response;
+use App\Models\UserApp;
+use App\Models\Novedades;
+
+
 
 
 class HomeController extends Controller
@@ -24,7 +28,9 @@ class HomeController extends Controller
     }
 
     public function list(Request $request,Response $response){
-        return $this->view->render($response,'listausuarios.twig');
+
+        $user_app = UserApp::all();
+        return $this->view->render($response,'listausuarios.twig',['users' => $user_app] );
     }
     
     public function createnovedad(Request $request,Response $response){
@@ -32,7 +38,9 @@ class HomeController extends Controller
     }
 
     public function listnovedad(Request $request,Response $response){
-        return $this->view->render($response,'listanovedad.twig');
+        
+        $list_novedad = Novedades::all();
+        return $this->view->render($response,'listanovedad.twig',['novedades' => $list_novedad] );
     }
 
     public function createoferta(Request $request,Response $response){

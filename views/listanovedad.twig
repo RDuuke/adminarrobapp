@@ -1,4 +1,21 @@
 {% extends "template/base.twig" %}
 {% block content %}
-ver novedades
+
+<table class="table">
+    <thead>
+        <th>Titulo</th>
+        <th>Tipo de Novedad</th>
+        <th>Creacion</th>
+        <th>Actualizacion</th>
+        <th>Operaciones</th>
+    </thead>
+    {% for novedad in novedades %}
+    <tbody>
+        <td>{{ novedad.titulo }}</td>
+        <td>{{ novedad.tipo_novedad }}</td>
+        <td>{{ novedad.created_at }}</td>
+        <td>{{ novedad.updated_at }}</td>
+    </tbody>
+    {% endfor %}
+</table>
 {% endblock %}

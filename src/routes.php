@@ -3,6 +3,7 @@
 
 $app->get("/", 'HomeController:index')->setName('login');
 $app->get("/logout", 'AuthController:signout')->setName('logout');
+$app->get("/test", 'NovedadController:getAll');
 
 
 

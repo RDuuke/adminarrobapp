@@ -1,4 +1,23 @@
 {% extends "template/base.twig" %}
 {% block content %}
-lista de usuarios 
+
+
+<table class="table">
+    <thead>
+        <th>Nombre</th>
+        <th>E-mail</th>
+        <th>Estado</th>
+        <th>Operaciones</th>
+    </thead>
+    {% for user in users  %}
+    <tbody>
+        <td>{{ user.nombre }}</td>
+        <td>{{ user.email }}</td>
+        <td>{{ user.estado }}</td>
+    </tbody>
+    {% endfor %}
+</table>
+
+
+
 {% endblock %}

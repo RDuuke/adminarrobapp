@@ -37,6 +37,7 @@ class UserController extends Controller
         return $response->withRedirect($this->router->pathFor("usuario.list"));
     }
 
+  
     
 
 }

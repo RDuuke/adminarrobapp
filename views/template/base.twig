@@ -125,7 +125,7 @@
                             <a href="#"><i class="fa fa-wrench fa-fw"></i>Configuraciones<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="login.html">Login Page</a>
+                                    
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->
@@ -140,6 +140,7 @@
         <!-- Page Content -->
         <div id="page-wrapper">
             <div class="container-fluid">
+                        {% include 'template/partials/flash.twig' %}
 
          {% block content %}{% endblock %}
 
@@ -158,6 +159,8 @@
     <script src="{{ base_url }}/js/bootstrap.js"></script>
     <script src="{{ base_url }}/js/metisMenu.js"></script>
     <script src="{{ base_url }}/js/sb-admin-2.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    
 
 </body>
 

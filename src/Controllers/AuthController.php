@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Models\User;
+use App\Models\UserApp;
 use Respect\Validation\Validator as v;
 use Slim\Http\Request;
 use Slim\Http\Response;
@@ -111,5 +112,14 @@ class AuthController extends Controller
         $this->flash->addMessage('Error', "No sé Elimino correctamente");
         return $response->withRedirect($this->router->pathFor('admin.user.index'));
     }
+
+    public function mostrar (Request $request, Response $response){
+
+        $user_app = UserApp::all();
+
+        return $this->view->render($response, 'usuario.list',['users' => $user_app]);
+
+    }
+
 
 }
