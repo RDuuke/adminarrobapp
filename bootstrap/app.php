@@ -8,6 +8,7 @@ use Slim\Views\Twig;
 use Slim\Views\TwigExtension;
 use App\Controllers\AuthController;
 use App\Controllers\UserController;
+use App\Controllers\UseradminController;
 use App\Controllers\NovedadController;
 use App\Controllers\HomeController;
 use App\Validation\Validator;
@@ -96,6 +97,10 @@ $container['UserController'] = function($container) {
 
 $container['NovedadController'] = function($container) {
     return new NovedadController($container);
+};
+
+$container['UseradminController'] = function($container) {
+    return new UseradminController($container);
 };
 
 

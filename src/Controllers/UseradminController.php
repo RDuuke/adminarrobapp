@@ -2,12 +2,12 @@
 
 namespace App\Controllers;
 
-use App\Models\UserApp;
+use App\Models\User;
 use Respect\Validation\Validator as v;
 use Slim\Http\Request;
 use Slim\Http\Response;
 
-class UserController extends Controller
+class UseradminController extends Controller
 { 
 
 
@@ -23,24 +23,23 @@ class UserController extends Controller
             return $response->withRedirect($this->router->pathFor("user.create"));
         }
         */
-       UserApp::create([
-            "nombre" => $request->getParam("nombre"),
+       User::create([
+            "name" => $request->getParam("name"),
             "email" => $request->getParam("email"),
             "password" => md5($request->getParam("password")),
-            "avatar" => $request->getParam("avatar"),
-            "estado" => $request->getParam("estado"),
-            "terminos_condiciones" => $request->getParam("terminos_condiciones")
+            "rol_id" => $request->getParam("rol_id"),
+            
         ]);
         // @TODO refactorizar
         $this->flash->addMessage("info", "Usuario Registrado");
 
-        return $response->withRedirect($this->router->pathFor("usuario.list"));
+        return $response->withRedirect($this->router->pathFor("usuarioadmin.list"));
     }
 
     public function show(Request $request,Response $response)
     {
         $router = $request->getAttribute('route');
-        $user = UserApp::find($router->getArgument('id'));
+        $user = User::find($router->getArgument('id'));
         return $this->view->render($response, 'usuario.editarusuarios', ['user' => $user]);
 
     }
@@ -49,12 +48,12 @@ class UserController extends Controller
     public function update(Request $request,Response $response)
     {
         $router = $request->getAttribute('route');
-        $user = UserApp::find($router->getArgument('id'));
-        $user->nombre = $request->getParam("nombre");
+        $user = User::find($router->getArgument('id'));
+        $user->name = $request->getParam("nombre");
         $user->email = $request->getParam("email");
-        //$user->password = md5($request->getParam("password"));
-        //$user->avatar = $request->getParam("avatar");
-        //$user->estado = $request->getParam("estado");
+        $user->password = md5($request->getParam("password"));
+        $user->avatar = $request->getParam("avatar");
+        $user->estado = $request->getParam("estado");
         $user->save();
         $this->flash->addMessage("info", "usuario actualizado.");
 

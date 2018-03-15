@@ -69,14 +69,32 @@
                             <!-- /input-group -->
                         </li>
                         <li>
-                            <a href="/admin"><i class="fa fa-dashboard fa-fw"></i>home</a>
+                            <a href="/admin"><i class="fa fa-dashboard fa-fw"></i>Home</a>
                         </li>
 
                         {% if auth.check %}
+
+                         {% if auth.user.rol_id == 1 %}
+                        
+                        <li>
+                            <a href="#"><i class="fa fa-user fa-fw"></i>Usuarios Admin<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="{{ path_for('usuarioadmin.create') }}"><i class="fa fa-plus fa-fw"></i>Agregar usuario</a>
+                                </li>
+                                <li>
+                                    <a href="{{ path_for('usuarioadmin.list') }}"><i class="fa fa-th-list  s fa-fw"></i>Ver usuarios</a>
+                                </li>
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
+
+                       {% endif %}
+
                         {% if auth.user.rol_id == 1 %}
                         
                         <li>
-                            <a href="#"><i class="fa fa-user fa-fw"></i>Usuarios<span class="fa arrow"></span></a>
+                            <a href="#"><i class="fa fa-user fa-fw"></i>Usuarios App<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
                                     <a href="{{ path_for('usuario.create') }}"><i class="fa fa-plus fa-fw"></i>Agregar usuario</a>
@@ -104,8 +122,7 @@
                             <!-- /.nav-second-level -->
                         </li>
 
-                        {% if auth.check %}
-                        {% if auth.user.rol_id == 1 %}
+                       
                         <li>
                             <a href="#"><i class="fa fa-book fa-fw"></i>Ofertas academicas<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
@@ -118,18 +135,23 @@
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
-                        {% endif %}
-                        {% endif %}
+                    
+
+                        {% if auth.check %}
+                        {% if auth.user.rol_id == 1 %}
 
                         <li class="active">
                             <a href="#"><i class="fa fa-wrench fa-fw"></i>Configuraciones<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    
+                                    <a href="{{ path_for('') }}"><i class="fa fa-th-list  s fa-fw"></i>Base de Datos</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
+
+                        {% endif %}
+                        {% endif %}
                     </ul>
                 </div>
                 <!-- /.sidebar-collapse -->

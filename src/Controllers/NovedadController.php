@@ -46,6 +46,33 @@ class NovedadController extends Controller
                             ->withJson($novedades, 201);
         return $nResponse;
     }
+
+    public function update(Request $request,Response $response)
+    {
+        $router = $request->getAttribute('route');
+        $novedad = Novedades::find($router->getArgument('id'));
+        $novedad->titulo = $request->getParam("titulo");
+        $novedad->resumen = $request->getParam("resumen");
+        $novedad->link = $request->getParam("link");
+        $novedad->save();
+        $this->flash->addMessage("info", "Novedad actualizado.");
+
+        return $response->withRedirect($this->router->pathFor('usuario.listnovedad'));
+
+    }
+
+    public function delete(Request $request, Response $response)
+    {
+        $router = $request->getAttribute('route');
+        $user = Novedades::find($router->getArgument('id'));
+        if ($user->delete()) {
+            $this->flash->addMessage('info', "Se Elimino correctamente");
+            return $response->withRedirect($this->router->pathFor('usuario.listnovedad'));
+        }
+        $this->flash->addMessage('Error', "No sé Elimino correctamente");
+        return $response->withRedirect($this->router->pathFor('usuario.listnovedad'));
+    }
+
  
     
 
