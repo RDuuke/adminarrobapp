@@ -32,7 +32,7 @@ class HomeController extends Controller
         $user_app = UserApp::all();
         return $this->view->render($response,'listausuarios.twig',['users' => $user_app] );
     }
-    
+
     public function createnovedad(Request $request,Response $response){
         return $this->view->render($response,'agregarnovedad.twig');
     }
@@ -61,6 +61,12 @@ class HomeController extends Controller
         return $this->view->render($response, 'editarnovedad.twig', ['novedad' => $novedades]);
     }
 
+    public function editarusuariosadmin(Request $request,Response $response){
+        $router = $request->getAttribute('route');
+        $ediuseradmin = User::find($router->getArgument('id'));
+        return $this->view->render($response, 'editarusuariosadmin.twig', ['useradmin' => $ediuseradmin]);
+    }
+
     public function createadmin(Request $request,Response $response){
         return $this->view->render($response,'agregausuariosadmin.twig');
     }
@@ -70,6 +76,12 @@ class HomeController extends Controller
         return $this->view->render($response,'listausuariosadmin.twig',['useradmin' => $useradmin] );
     }
 
+    public function createdatabase(Request $request,Response $response)
+    {
+      # code...
+      return $this->view->render($response,'databasemanager.twig');
+    }
 
-    
+
+
 }

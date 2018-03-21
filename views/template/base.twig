@@ -18,8 +18,11 @@
     <link href="{{ base_url }}/css/sb-admin-2.css" rel="stylesheet">
     <link href="{{ base_url }}/css/font-awesome.css" rel="stylesheet" type="text/css">
 
+
+
 </head>
 
+{% if auth.check %}
 <body>
 
     <div id="wrapper">
@@ -75,7 +78,7 @@
                         {% if auth.check %}
 
                          {% if auth.user.rol_id == 1 %}
-                        
+
                         <li>
                             <a href="#"><i class="fa fa-user fa-fw"></i>Usuarios Admin<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
@@ -92,7 +95,7 @@
                        {% endif %}
 
                         {% if auth.user.rol_id == 1 %}
-                        
+
                         <li>
                             <a href="#"><i class="fa fa-user fa-fw"></i>Usuarios App<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
@@ -122,7 +125,7 @@
                             <!-- /.nav-second-level -->
                         </li>
 
-                       
+
                         <li>
                             <a href="#"><i class="fa fa-book fa-fw"></i>Ofertas academicas<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
@@ -135,7 +138,7 @@
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
-                    
+
 
                         {% if auth.check %}
                         {% if auth.user.rol_id == 1 %}
@@ -144,7 +147,7 @@
                             <a href="#"><i class="fa fa-wrench fa-fw"></i>Configuraciones<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="{{ path_for('') }}"><i class="fa fa-th-list  s fa-fw"></i>Base de Datos</a>
+                                    <a href="{{ path_for('database.create') }}"><i class="fa fa-th-list  s fa-fw"></i>Base de Datos</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->
@@ -181,9 +184,32 @@
     <script src="{{ base_url }}/js/bootstrap.js"></script>
     <script src="{{ base_url }}/js/metisMenu.js"></script>
     <script src="{{ base_url }}/js/sb-admin-2.js"></script>
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-    
+
 
 </body>
 
+{% endif %}
+{% if auth.user.rol_id != 1 %}
+{% if auth.user.rol_id != 2 %}
+{% if auth.user.rol_id != 3 %}
+{% if auth.user.rol_id != 4 %}
+<br>
+<br>
+<div class="container">
+    <div class="panel panel-danger">
+      <div class="panel-heading">
+            Danger Panel Error 404
+      </div>
+      <div class="panel-body">
+        <p>No hay un usuario autenticado.</p>
+      </div>
+      <div class="panel-footer">
+        <a href="/">Login</a>
+      </div>
+    </div>
+</div>
+{% endif %}
+{% endif %}
+{% endif %}
+{% endif %}
 </html>

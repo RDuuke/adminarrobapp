@@ -1,7 +1,6 @@
 {% extends "template/base.twig" %}
 {% block content %}
 
-
 <div class="row">
         <div class="col-lg-8 mb-4">
           <h3>Agregar Novedades para APP @Medellín</h3>
@@ -10,16 +9,16 @@
             <div class="control-group form-group">
               <div class="controls">
                 <label>Titulo:</label>
-                <input type="text" class="form-control" name="titulo" id="name" />
+                <input type="text" class="form-control" name="titulo" id="titulo" />
                 <p class="help-block"></p>
               </div>
             </div>
             <div class="control-group form-group">
               <div class="controls">
                 <label>resumen:</label>
-                <input type="tel" class="form-control" name="resumen" id="email" maxlength="100" placeholder="100 caracteres" />
+                <input type="tel" class="form-control" name="resumen" id="resumen" maxlength="100" placeholder="100 caracteres" />
               </div>
-            </div> 
+            </div>
             <div class="control-group form-group">
               <div class="controls">
                 <label>Link:</label>
@@ -38,22 +37,21 @@
                 </div>
               </div>
             </div>
-            {% autoescape %}
-            {{ var|raw }}
             <div class="control-group form-group">
               <div class="controls">
                 <label>Contenido:</label>
-                <textarea  name="contenido" rows="10" cols="1000" class="form-control" id="message" maxlength="9999" style="resize:none"></textarea>
+                <textarea  id="bodyField" name="contenido" class="form-control"></textarea>
+
               </div>
             </div>
-            {% endautoescape %}
+
             <div class="form-group">
             <input type="file" name="imagen" id="imagen" />
             </div>
             <div id="success"></div>
             <!-- For success/fail messages -->
             <button type="submit" class="btn btn-primary" id="sendMessageButton">Guardar</button>
-            
+
           </form>
         </div>
 

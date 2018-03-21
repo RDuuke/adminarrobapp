@@ -1,6 +1,6 @@
 {
-    "name": "jduque/objetos-aprendizaje",
-    "description": "Biblioteca de objetos de aprendizaje",
+    "name": "Adminarrobapp",
+    "description": "Sistema administrativo App @Medellín",
     "type": "project",
     "license": "MIT",
     "require": {
@@ -10,7 +10,9 @@
         "slim/flash": "^0.4.0",
         "zeuxisoo/slim-whoops": "0.6.*",
         "respect/validation": "^1.1",
-        "illuminate/pagination": "5.4.36"
+        "illuminate/pagination": "5.4.36",
+        "phpoffice/phpspreadsheet": "^1.2"
+
     },
     "autoload": {
         "psr-4": {

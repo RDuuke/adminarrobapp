@@ -26,13 +26,13 @@
         <td>{{ user.rol_id }}</td>
         <td>{{ user.created_at }}</td>
         <td>{{ user.updated_at }}</td>
-        <td><a class="btn btn-primary" href="{{ path_for("usuario.editarusuarios", {'id' : user.id}) }}">Editar</a> -
+        <td><a class="btn btn-primary" href="{{ path_for("usuario.editarusuariosadmin", {'id' : user.id}) }}">Editar</a> -
         <div class="btn-group">
                 <button type="button" class="btn btn-danger" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Eliminar <span class="caret"></span>
                 </button>
                         <ul class="dropdown-menu">
-                            <li><a href="{{ path_for('usuario.delete', {'id' : user.id}) }}">Eliminar</a></li>
+                            <li><a href="{{ path_for('usuarioadmin.delete', {'id' : user.id}) }}">Eliminar</a></li>
                             <li role="separator" class="divider"></li>
                             <li><a href="#">Cancelar</a></li>
                         </ul>

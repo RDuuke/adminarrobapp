@@ -9,7 +9,7 @@ use Slim\Http\Request;
 use Slim\Http\Response;
 
 class AuthController extends Controller
-{ 
+{
 
 
     public function store(Request $request,Response $response)
