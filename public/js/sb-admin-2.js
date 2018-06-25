@@ -1,11 +1,18 @@
 $(function() {
     $('#side-menu').metisMenu();
+    $('#sendMessageButton').on('click', function(e){
+      e.preventDefault();
+      $.get("http://200.13.254.146/webserviceapp/firebase/send_push.php").done(function(){
+        $("#formCreateNovedad").trigger('submit');
+      });
+    });
 });
 
 //Loads the correct sidebar on window load,
 //collapses the sidebar on window resize.
 // Sets the min-height of #page-wrapper to window size
 $(function() {
+  $('#bodyField').summernote();
     $(window).bind("load resize", function() {
         var topOffset = 50;
         var width = (this.window.innerWidth > 0) ? this.window.innerWidth : this.screen.width;

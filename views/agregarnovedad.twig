@@ -1,11 +1,17 @@
 {% extends "template/base.twig" %}
 {% block content %}
 
+<br>
+<div class="well">
+<h4>Tenga en cuenta...!</h4>
+<p>El tamaño ideal para las imagenes dentro de APP es (900 x 600) pixeles.</P>
+</div>
+
 <div class="row">
         <div class="col-lg-8 mb-4">
           <h3>Agregar Novedades para APP @Medellín</h3>
           <br>
-          <form action="{{ path_for('novedad.insertar') }}"  method="post" enctype="multipart/form-data">
+          <form action="{{ path_for('novedad.insertar') }}"  method="post" enctype="multipart/form-data" id="formCreateNovedad">
             <div class="control-group form-group">
               <div class="controls">
                 <label>Titulo:</label>
@@ -30,9 +36,8 @@
                 <div class="form-group">
                     <label>Tipo novedad</label>
                         <select class="form-control" name="tipo_novedad">
-                            <option value="1">Principal</option>
-                            <option value="2">Activa</option>
-                            <option value="3">Desactivada</option>
+                            <option value="2">Principal</option>
+                            <option value="1">Destacada</option>
                         </select>
                 </div>
               </div>
@@ -40,7 +45,8 @@
             <div class="control-group form-group">
               <div class="controls">
                 <label>Contenido:</label>
-                <textarea  id="bodyField" name="contenido" class="form-control"></textarea>
+                <textarea id="bodyField" name="contenido" >
+                </textarea>
 
               </div>
             </div>
@@ -50,9 +56,11 @@
             </div>
             <div id="success"></div>
             <!-- For success/fail messages -->
-            <button type="submit" class="btn btn-primary" id="sendMessageButton">Guardar</button>
+
 
           </form>
+          <button type="submit" class="btn btn-primary" id="sendMessageButton">Guardar</button>
+
         </div>
 
       </div>

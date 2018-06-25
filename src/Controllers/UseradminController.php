@@ -13,16 +13,7 @@ class UseradminController extends Controller
 
     public function insertar(Request $request,Response $response)
     {
-        /*
-        $validation = $this->validation->validate($request, [
-            "name" => v::notEmpty()->alpha(),
-            "email" => v::notEmpty()->email()->noWhitespace()->emailAvailable(),
-            "password" => v::notEmpty()->noWhitespace()
-        ]);
-        if ($validation->failed()) {
-            return $response->withRedirect($this->router->pathFor("user.create"));
-        }
-        */
+
        User::create([
             "name" => $request->getParam("name"),
             "email" => $request->getParam("email"),
@@ -30,7 +21,6 @@ class UseradminController extends Controller
             "rol_id" => $request->getParam("rol_id"),
 
         ]);
-        // @TODO refactorizar
         $this->flash->addMessage("info", "Usuario Registrado");
 
         return $response->withRedirect($this->router->pathFor("usuarioadmin.list"));
