@@ -5,4 +5,4 @@
 /resource/tmp
 bootstrap/
 /node_modules
-base.twig
+views/template/base.twig
