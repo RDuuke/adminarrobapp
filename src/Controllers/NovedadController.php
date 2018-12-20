@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Models\Novedades;
+use Respect\Validation\Rules\No;
 use Respect\Validation\Validator as v;
 use Slim\Http\Request;
 use Slim\Http\Response;
@@ -14,14 +15,10 @@ class NovedadController extends Controller
     public function insertar(Request $request,Response $response)
     {
 
-        $files = $request->getUploadedFiles();
-        $imagen = $files['imagen'];
-        $imagen->moveTo(DIR_IMG . "img_novedades" . DS . $imagen->getClientFilename());
-
-
         Novedades::create([
-            "imagen" => 'http://200.13.254.146/webserviceapp/img_novedades/'.$imagen->getClientFilename(),
             "titulo" => $request->getParam("titulo"),
+            "miniatura" => 'http://200.13.254.146/webserviceapp/img_novedades/'.$request->getParam("miniatura"),
+            "imagen" => 'http://200.13.254.146/webserviceapp/img_novedades/'.$request->getParam("imagen"),
             "contenido" =>$request->getParam("contenido"),
             "resumen" => $request->getParam("resumen"),
             "link" => $request->getParam("link"),
@@ -40,17 +37,25 @@ class NovedadController extends Controller
         return $nResponse;
     }
 
-    public function update(Request $request,Response $response)
+    public function update(Request $request,Response $response, $args)
     {
-        $router = $request->getAttribute('route');
-        $novedad = Novedades::find($router->getArgument('id'));
-        $novedad->titulo = $request->getParam("titulo");
-        $novedad->resumen = $request->getParam("resumen");
-        $novedad->link = $request->getParam("link");
-        $novedad->save();
-        $this->flash->addMessage("info", "Novedad actualizado.");
 
-        return $response->withRedirect($this->router->pathFor('usuario.listnovedad'));
+        $novedad = Novedades::updateOrCreate(['id_novedad' => $args['id']],
+            [
+            "titulo" => $request->getParam("titulo"),
+            "miniatura" => $request->getParam("miniatura"),
+            "imagen" => $request->getParam("imagen"),
+            "contenido" =>$request->getParam("contenido"),
+            "resumen" => $request->getParam("resumen"),
+            "link" => $request->getParam("link"),
+            "tipo_novedad" => $request->getParam("tipo_novedad")
+        ]);
+        if ($novedad instanceof Novedades == 1) {
+            $this->flash->addMessage("info", "Novedad actualizado.");
+            return $response->withRedirect($this->router->pathFor('usuario.listnovedad'));
+        }
+        $this->flash->addMessage("error", "Error al actualizar la novedad");
+        return $response->withRedirect($this->router->pathFor('usuario.createnovedad'));
 
     }
 

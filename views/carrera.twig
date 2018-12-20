@@ -1,0 +1,46 @@
+{% extends "template/base.twig" %}
+{% block style %}
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.10.18/r-2.2.2/datatables.min.css"/>
+{% endblock %}
+{% block content %}
+    <h3>Lista de carreras</h3>
+    <table class="table">
+    <thead>
+        <tr>
+            <th>Institución</th>
+            <th>SNIES</th>
+            <th>Nombre</th>
+            <th>Nivel academico</th>
+            <th>Metodología</th>
+            <th>Duración</th>
+            <th>Costo</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for carrera in carreras %}
+            <tr>
+                <td>{{ carrera.universidad.nombre }}</td>
+                <td>{{ carrera.codigo_snies }}</td>
+                <td>{{ carrera.nombre }}</td>
+                <td>{{ carrera.nivel_academico }}</td>
+                <td>{{ carrera.metodologia }}</td>
+                <td>{{ carrera.numero_periodos_de_duracion }}</td>
+                <td>{{ carrera.costo_matricula }}</td>
+                <td>
+                    <a class="btn btn-primary" href="{{ path_for("carrera.edit", { codigo : carrera.codigo_snies }) }}">Editar</a> -
+                    <a class="btn btn-danger" href="{{ path_for("carrera.delete", { codigo : carrera.codigo_snies }) }}">Eliminar</a>
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
+{% block script %}
+    <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.18/r-2.2.2/datatables.min.js"></script>
+    <script>
+        $(document).ready( function () {
+           $("table").DataTable();
+        });
+    </script>
+{% endblock %}

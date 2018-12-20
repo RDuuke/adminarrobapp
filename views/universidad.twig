@@ -1,0 +1,48 @@
+{% extends "template/base.twig" %}
+{% block style %}
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.10.18/r-2.2.2/datatables.min.css"/>
+{% endblock %}
+{% block content %}
+    <h3>Lista de universidades</h3>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Código</th>
+                <th>Nombre</th>
+                <th>Sector</th>
+                <th>Carácter académico</th>
+                <th>Dirección</th>
+                <th>Teléfono</th>
+                <th>Estado</th>
+                <th>Google maps si/no</th>
+                <th>Página  web si/no</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for universidad in universidades %}
+                <tr>
+                    <td>{{ universidad.codigo }}</td>
+                    <td>{{ universidad.nombre }}</td>
+                    <td>{{ universidad.sector }}</td>
+                    <td>{{ universidad.caracter_academico }}</td>
+                    <td>{{ universidad.direccion }}</td>
+                    <td>{{ universidad.telefono }}</td>
+                    <td>{{ universidad.estado }}</td>
+                    <td>{{ universidad.direccion_google_maps is empty ? "No" : "Sí" }}</td>
+                    <td>{{ universidad.web is empty ?  "No" : "Si"}}</td>
+                    <td><a class="btn btn-primary" href="{{ path_for("universidad.edit", { codigo : universidad.codigo }) }}">Editar</a> -
+                        <a class="btn btn-danger" href="{{ path_for("universidad.delete", { codigo : universidad.codigo }) }}">Eliminar</a></td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
+{% block script %}
+    <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.18/r-2.2.2/datatables.min.js"></script>
+    <script>
+        $(document).ready( function () {
+            $("table").DataTable();
+        });
+    </script>
+{% endblock %}

@@ -1,44 +1,31 @@
 {% extends "template/base.twig" %}
 {% block content %}
-<br>
-
-<div class="well">
-<h4>Estado</h4>
-<p>0 => Activo</P>
-<p>1 => Pasivo</P>
-</div>
-
-<table class="table">
-    <thead>
-        <th>Nombre</th>
-        <th>E-mail</th>
-        <th>Estado</th>
-        <th>Creacion</th>
-        <th>Actualizacion</th>
-        <th>Operaciones</th>
-    </thead>
-    {% for user in users  %}
-    <tbody>
-        <td>{{ user.name }}</td>
-        <td>{{ user.email }}</td>
-        <td>{{ user.estado }}</td>
-        <td>{{ user.created_at }}</td>
-        <td>{{ user.updated_at }}</td>
-        <td><a class="btn btn-primary" href="{{ path_for("usuario.editarusuarios", {'id' : user.id}) }}">Editar</a> -
-        <div class="btn-group">
-                <button type="button" class="btn btn-danger" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Eliminar <span class="caret"></span>
-                </button>
-                        <ul class="dropdown-menu">
-                            <li><a href="{{ path_for('usuario.delete', {'id' : user.id}) }}">Eliminar</a></li>
-                            <li role="separator" class="divider"></li>
-                            <li><a href="#">Cancelar</a></li>
-                        </ul>
-            </div>
-    </tbody>
-    {% endfor %}
-</table>
-
-
+    <h3>Lista de usuarios</h3>
+    <table class="table">
+        <thead>
+            <th>Nombres</th>
+            <th>Apellidos</th>
+            <th>E-mail</th>
+            <th>Operaciones</th>
+        </thead>
+        {% for user in users  %}
+        <tbody>
+            <td>{{ user.nombre }}</td>
+            <td>{{ user.apellido }}</td>
+            <td>{{ user.email }}</td>
+            <td><a class="btn btn-primary" href="{{ path_for("usuario.editarusuarios", {'id' : user.id}) }}">Editar</a> -
+            <div class="btn-group">
+                    <button type="button" class="btn btn-danger" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Eliminar <span class="caret"></span>
+                    </button>
+                            <ul class="dropdown-menu">
+                                <li><a href="{{ path_for('usuario.delete', {'id' : user.id}) }}">Eliminar</a></li>
+                                <li role="separator" class="divider"></li>
+                                <li><a href="#">Cancelar</a></li>
+                            </ul>
+                </div>
+        </tbody>
+        {% endfor %}
+    </table>
 
 {% endblock %}

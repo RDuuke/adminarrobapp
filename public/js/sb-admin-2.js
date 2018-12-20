@@ -9,6 +9,23 @@ $(function() {
 
         
     });
+    $('.fileupload').fileupload({
+        dataType: 'json',
+        done: function (e, data) {
+
+            var content = document.getElementById($(this).attr('data-type'));
+
+            console.log(data.result)
+            var img = document.createElement('img');
+            img.setAttribute('src', 'http://200.13.254.146/webserviceapp/img_novedades/'+ data.result);
+            img.setAttribute("width", "400");
+            $("#"+ $(this).attr('data-input')).val(data.result);
+            content.innerHTML = '';
+            content.appendChild(img);
+            content.classList.remove('none');
+            content.classList.add('block');
+        }
+    });
 });
 
 //Loads the correct sidebar on window load,

@@ -2,6 +2,10 @@
 
 namespace App\Controllers;
 
+use App\Models\Career;
+use App\Models\University;
+use App\Tool\Tools;
+use Kreait\Firebase\Messaging\CloudMessage;
 use Slim\Http\Request;
 use Slim\Http\Response;
 use App\Models\UserApp;
@@ -42,13 +46,6 @@ class HomeController extends Controller
         return $this->view->render($response,'listanovedad.twig',['novedades' => $list_novedad] );
     }
 
-    public function createoferta(Request $request,Response $response){
-        return $this->view->render($response,'agregaoferta.twig');
-    }
-
-    public function listaferta(Request $request,Response $response){
-        return $this->view->render($response,'listaoferta.twig');
-    }
 
     public function editarusuarios(Request $request,Response $response){
         $router = $request->getAttribute('route');
@@ -58,7 +55,7 @@ class HomeController extends Controller
     public function editarnovedad(Request $request,Response $response){
         $router = $request->getAttribute('route');
         $novedades = Novedades::find($router->getArgument('id'));
-        return $this->view->render($response, 'editarnovedad.twig', ['novedad' => $novedades]);
+        return $this->view->render($response, 'agregarnovedad.twig', ['novedad' => $novedades]);
     }
 
     public function editarusuariosadmin(Request $request,Response $response){
@@ -78,16 +75,33 @@ class HomeController extends Controller
 
     public function updateBDcarreras(Request $request,Response $response)
     {
-      # code...
       return $this->view->render($response,'databasecarreras.twig');
     }
 
     public function updateBDuniversidades(Request $request,Response $response)
     {
-      # code...
-      return $this->view->render($response,'databaseuniversidades.twig');
+      return $this->view->render($response,'databaseuniversidad.twig');
     }
 
+    public function universityAll(Request $request, Response $response)
+    {
+        $universidades = University::all();
+        return $this->view->render($response, 'universidad.twig', ['universidades' => $universidades]);
+    }
 
+    public function careeraAll(Request $request, Response $response)
+    {
+        $carreras = Career::all();
+        return $this->view->render($response, 'carrera.twig', ['carreras' => $carreras]);
+    }
+
+    public function sendNotification(Request $request, Response $response)
+    {
+        $this->firebase->getMessaging()
+            ->send([
+                ""
+            ]);
+
+    }
 
 }

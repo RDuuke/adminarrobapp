@@ -1,0 +1,48 @@
+{% extends "template/base.twig" %}
+{% block content %}
+
+
+<br>
+
+<div class="well">
+<h4>Base de datos universidades</h4>
+<p>Tipo de archivo .xls</P>
+</div>
+
+
+<div class="ed-container full">
+    <div class="ed-item s-100 l-50">
+    <h3>Actualización universidades</h3>
+    <br>
+        <a href="xlsx/test.xlsx" download="plantilla.xlsx">Descargar plantilla</a>
+        <form action="{{ path_for('database.universidades') }}" method="post" enctype="multipart/form-data">
+        <br>
+            <label for="archivo">Subir archivo xlsx </label>
+            <br>
+            <input type="file" name="archivo" id="archivo" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" >
+            <br>
+            <button>Cargar</button>
+        </form>
+    </div>
+    <div class="ed-item s-100 l-50">
+        <br>
+        {% if flash('total') is not empty %}
+            {% for msg in flash('total') %}
+                <p>Total de registros: {{ msg }}.</p>
+            {% endfor %}
+        {% endif %}
+        {% if flash('creators') is not empty %}
+                {% for msg in flash('creators') %}
+                    <p>Total correctos: {{ msg }}.</p>
+                {% endfor %}
+        {% endif %}
+
+        {% if flash('errors') is not empty %}
+                {% for msg in flash('errors') %}
+                    <p>Total errores: {{ msg }}.</p>
+                {% endfor %}
+        {% endif %}
+    </div>
+</div>
+
+{% endblock %}

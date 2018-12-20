@@ -1,0 +1,93 @@
+{% extends "template/base.twig" %}
+{% block content %}
+    {% include "template/partials/flash.twig" %}
+
+    <div class="row">
+        <div class="col-md-12 text-center">
+            <h3>
+                {% if universidad %}
+                    Editando la {{ universidad.nombre }}.
+                {% else %}
+                    Agregar una nueva universidad.
+                {% endif %}
+            </h3>
+            {% if universidad %}
+                <form action="{{ path_for('universidad.update', { codigo : universidad.codigo}) }}" method="post">
+            {% else %}
+                <form action="{{ path_for('universidad.store') }}" method="post">
+            {% endif %}
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-6 text-left">
+                            <div class="form-group">
+                                <label for="">Código</label>
+                                <input type="text" name="codigo" class="form-control" required value="{{ universidad ? universidad.codigo : "" }}" {{ universidad ? "readonly" : "" }}>
+                            </div>
+                            <div class="form-group">
+                                <label for="">Nombre</label>
+                                <input type="text" name="nombre" class="form-control" required value="{{ universidad ? universidad.nombre : "" }}" {{ universidad ? "readonly" : "" }}>
+                            </div>
+                            <div class="form-group">
+                                <label for="">Sector</label>
+                                <select name="sector" id="sector" class="form-control">
+                                        <option value="">Seleccione</option>
+                                        <option value="PRIVADA" {{ universidad.sector == 'PRIVADA' ? 'selected' : '' }}>PRIVADA</option>
+                                        <option value="OFICIAL" {{ universidad.sector == 'PÚBLICA' ? 'selected' : '' }}>PÚBLICA</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="">Carácter academico</label>
+                                <input type="text" name="caracter_academico" class="form-control" required value="{{ universidad ? universidad.caracter_academico : "" }}">
+                            </div>
+                            <div class="form-group">
+                                <label for="">Departamento</label>
+                                <input type="text" name="departamento" class="form-control" required value="{{ universidad ? universidad.departamento : "" }}">
+                            </div>
+                            <div class="form-group">
+                                <label for="">Estado</label>
+                                <select name="estado" id="estado" class="form-control" required>
+                                    <option value="">Seleccione</option>
+                                    <option value="1" {{ universidad.estado == 1 ? 'selected' : '' }}>ACTIVA</option>
+                                    <option value="0" {{ universidad.estado == 0 ? 'selected' : '' }}>INACTIVA</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="">Principal seccional</label>
+                                <input type="text" name="principal_seccional" class="form-control" required value="{{ universidad ? universidad.principal_seccional : "" }}">
+                            </div>
+                        </div>
+                        <div class="col-md-6 text-right">
+                            <div class="form-group">
+                                <label for="">Pagina web</label>
+                                <input type="text" name="web" class="form-control" required value="{{ universidad ? universidad.web : "" }}">
+                            </div>
+                            <div class="form-group">
+                                <label for="">URL logo</label>
+                                <input type="text" name="logo_universidad" class="form-control" required value="{{ universidad ? universidad.logo_universidad : "" }}">
+                            </div>
+                            <div class="form-group">
+                                <label for="">Municipio</label>
+                                <input type="text" name="municipio" class="form-control" required value="{{ universidad ? universidad.municipio : "" }}">
+                            </div>
+                            <div class="form-group">
+                                <label for="">Dirección</label>
+                                <input type="text" name="direccion" class="form-control" required value="{{ universidad ? universidad.direccion : "" }}">
+                            </div>
+                            <div class="form-group">
+                                <label for="">Google Maps</label>
+                                <input type="text" name="direccion_google_maps" class="form-control" value="{{ universidad ? universidad.direccion_google_maps : "" }}">
+                            </div>
+                            <div class="form-group">
+                                <label for="">Teléfono</label>
+                                <input type="text" name="telefono" class="form-control" required value="{{ universidad ? universidad.telefono : "" }}">
+                            </div>
+
+                        </div>
+                    </div>
+                    <button class="btn btn-primary">Guardar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+{% endblock %}

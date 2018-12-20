@@ -41,24 +41,25 @@ class UserController extends Controller
     {
         $router = $request->getAttribute('route');
         $user = UserApp::find($router->getArgument('id'));
-        return $this->view->render($response, 'usuario.editarusuarios', ['user' => $user]);
+        return $this->view->render($response, 'agregarusuarios.twig', ['usuario' => $user]);
 
     }
 
 
-    public function update(Request $request,Response $response)
+    public function update(Request $request,Response $response, $args)
     {
-        $router = $request->getAttribute('route');
-        $user = UserApp::find($router->getArgument('id'));
+        $user = UserApp::find($args['id']);
         $user->nombre = $request->getParam("nombre");
         $user->email = $request->getParam("email");
-        //$user->password = md5($request->getParam("password"));
-        //$user->avatar = $request->getParam("avatar");
-        //$user->estado = $request->getParam("estado");
-        $user->save();
-        $this->flash->addMessage("info", "usuario actualizado.");
+        $user->apellido = $request->getParam("apellido");
+        $user->documento = $request->getParam("documento");
+        if ($user->save()) {
+            $this->flash->addMessage("info", "usuario actualizado.");
+            return $response->withRedirect($this->router->pathFor('usuario.list'));
+        }
+        $this->flash->addMessage("errors", "Error a la hora de actualizar el usuario");
+        return $response->withRedirect($this->router->pathFor("usuario.editarusuarios"));
 
-        return $response->withRedirect($this->router->pathFor('usuario.list'));
 
     }
 

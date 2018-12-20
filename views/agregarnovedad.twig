@@ -1,4 +1,7 @@
 {% extends "template/base.twig" %}
+{% block style %}
+  <link href="https://blueimp.github.io/jQuery-File-Upload/css/jquery.fileupload.css" rel="stylesheet" type="text/css">
+{% endblock %}
 {% block content %}
 
 <br>
@@ -11,57 +14,96 @@
         <div class="col-lg-8 mb-4">
           <h3>Agregar Novedades para APP @Medellín</h3>
           <br>
-          <form action="{{ path_for('novedad.insertar') }}"  method="post" enctype="multipart/form-data" id="formCreateNovedad">
+            {% if novedad %}
+            <form action="{{ path_for('novedad.editar', { id: novedad.id_novedad }) }}" method="post" enctype="multipart/form-data" id="formCreateNovedad">
+            {% else %}
+            <form action="{{ path_for('novedad.insertar') }}"  method="post" enctype="multipart/form-data" id="formCreateNovedad">
+            {% endif %}
             <div class="control-group form-group">
               <div class="controls">
                 <label>Titulo:</label>
-                <input type="text" class="form-control" name="titulo" id="titulo" />
+                <input type="text" required class="form-control" name="titulo" id="titulo" value="{{ novedad ? novedad.titulo : '' }}"/>
                 <p class="help-block"></p>
               </div>
             </div>
             <div class="control-group form-group">
               <div class="controls">
                 <label>resumen:</label>
-                <input type="tel" class="form-control" name="resumen" id="resumen" maxlength="100" placeholder="100 caracteres" />
+                <input type="text" required class="form-control" name="resumen" id="resumen" maxlength="100" placeholder="100 caracteres" value="{{ novedad ? novedad.resumen : '' }}" />
               </div>
             </div>
             <div class="control-group form-group">
               <div class="controls">
                 <label>Link:</label>
-                <input type="tel" class="form-control" name="link" id="url" />
+                <input type="url"  required class="form-control" name="link" id="url" value="{{ novedad ? novedad.link : '' }}"/>
               </div>
             </div>
             <div class="control-group form-group">
               <div class="controls">
                 <div class="form-group">
                     <label>Tipo novedad</label>
-                        <select class="form-control" name="tipo_novedad">
+                        <select class="form-control" name="tipo_novedad" required value="{{ novedad ? novedad.tipo_novedad : '' }}">
                             <option value="2">Principal</option>
                             <option value="1">Destacada</option>
                         </select>
                 </div>
               </div>
             </div>
+              <div class="control-group form-group">
+                  <div class="controls">
+                      <label for="">Imagen miniatura</label>
+                      <div class="form-group">
+                          <span class="btn btn-success fileinput-button">
+                        <i class="glyphicon glyphicon-plus"></i>
+                        <span>Agregar imagen</span>
+                        <input class="fileupload" type="file" data-type="content_imagen_miniatura" data-input="input_imagen_miniatura" name="files" multiple="" data-url="{{ path_for('images.upload') }}">
+                      </span>
+                      </div>
+                      <div class="content_imagen {{ novedad ? '' : 'none'}}" id="content_imagen_miniatura">
+                          {% if novedad %}
+                              <img src="{{ novedad.miniatura }}" alt="" width="400">
+                          {% endif %}
+                      </div>
+                  </div>
+                  <input type="hidden" name="miniatura" id="input_imagen_miniatura" value="{{ novedad.miniatura }}" >
+              </div>
+              <div class="control-group form-group">
+                  <div class="controls">
+                      <label for="">Imagen miniatura</label>
+                      <div class="form-group">
+                          <span class="btn btn-success fileinput-button">
+                        <i class="glyphicon glyphicon-plus"></i>
+                        <span>Agregar imagen</span>
+                        <input class="fileupload"  type="file" data-type="content_imagen" data-input="input_imagen" name="files" multiple="" data-url="{{ path_for('images.upload') }}">
+                      </span>
+                      </div>
+                      <div class="content_imagen {{ novedad ? '' : 'none'}}" id="content_imagen">
+                          {% if novedad %}
+                              <img src="{{ novedad.miniatura }}" alt="" width="400">
+                          {% endif %}
+                      </div>
+                  </div>
+                  <input type="hidden" id="input_imagen" name="imagen" value="{{ novedad.imagen }}">
+              </div>
             <div class="control-group form-group">
               <div class="controls">
                 <label>Contenido:</label>
-                <textarea id="bodyField" name="contenido" >
-                </textarea>
-
+                <textarea id="bodyField" name="contenido">{{ novedad ? novedad.contenido : "" }}</textarea>
               </div>
             </div>
 
             <div class="form-group">
-            <input type="file" name="imagen" id="imagen" />
             </div>
-            <div id="success"></div>
-            <!-- For success/fail messages -->
-
-
+              <button type="submit" class="btn btn-primary" >{{ novedad ? "Actualizar" : "Guardar" }}</button>
           </form>
-          <button type="submit" class="btn btn-primary" id="sendMessageButton">Guardar</button>
 
         </div>
 
       </div>
+{% endblock %}
+{% block script %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.iframe-transport/1.0.1/jquery.iframe-transport.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/blueimp-file-upload/9.28.0/js/jquery.fileupload.min.js"></script>
+    <script src="{{ base_url }}/public/js/fine-uploader.js"></script>
 {% endblock %}

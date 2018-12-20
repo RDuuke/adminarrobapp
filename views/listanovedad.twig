@@ -1,56 +1,53 @@
 {% extends "template/base.twig" %}
+{% block style %}
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.10.18/r-2.2.2/datatables.min.css"/>
+{% endblock %}
 {% block content %}
-<br>
-<div class="well">
-<h4>Tipo de Novedad</h4>
-<p>1 => Destacada</P>
-<p>2 => Principal</P>
-</div>
-
+<h3>Lista de novedades</h3>
 <table class="table">
     <thead>
-        <th>Titulo</th>
-        <th>Tipo de Novedad</th>
-        <th>Creacion</th>
-        <th>Actualizacion</th>
-        <th>Operaciones</th>
+        <tr>
+            <th>Titulo</th>
+            <th>Tipo de Novedad</th>
+            <th>Creacion</th>
+            <th>Notificada</th>
+            <th>Operaciones</th>
+        </tr>
+
     </thead>
-    {% for novedad in novedades %}
     <tbody>
-        <td>{{ novedad.titulo }}</td>
-        <td>{{ novedad.tipo_novedad }}</td>
-        <td>{{ novedad.created_at }}</td>
-        <td>{{ novedad.updated_at }}</td>
-        <td><a data-dismiss="modal" class="btn btn-primary" href="{{ path_for("novedad.editarnovedad", {'id' : novedad.id_novedad}) }}">Editar</a>-
-            <div class="btn-group">
-                <button type="button" class="btn btn-danger" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Eliminar <span class="caret"></span>
-                </button>
-                        <ul class="dropdown-menu">
-                            <li><a href="{{ path_for('novedad.delete', {'id' : novedad.id_novedad}) }}">Eliminar</a></li>
-                            <li role="separator" class="divider"></li>
-                            <li><a href="#">Cancelar</a></li>
-                        </ul>
-            </div>
-    </tbody>
+    {% for novedad in novedades %}
+        <tr>
+            <td>{{ novedad.titulo }}</td>
+            <td>{{ novedad.tipo_novedad == 1 ? 'Destacada' : 'Principal' }}</td>
+            <td>{{ novedad.created_at }}</td>
+            <td>{{ novedad.published == 1 ? 'Sí' : 'No' }}</td>
+            <td>
+                <a data-dismiss="modal" class="btn btn-primary" href="{{ path_for("novedad.editarnovedad", {'id' : novedad.id_novedad}) }}">Editar</a>-
+                <div class="btn-group">
+                    <button type="button" class="btn btn-danger" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Eliminar <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a href="{{ path_for('novedad.delete', {'id' : novedad.id_novedad}) }}">Eliminar</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="#">Cancelar</a></li>
+                    </ul>
+                </div>
+                <a data-id="{{ novedad.id_novedad }}" class="send-notification btn btn-warning">Enviar <i class="fa fa-bell"></i></a>
+            </td>
+        </tr>
     {% endfor %}
+    </tbody>
 </table>
 
-<div class="modal fade" tabindex="-1" role="dialog">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title">Modal title</h4>
-      </div>
-      <div class="modal-body">
-        <p>One fine body&hellip;</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
-    </div><!-- /.modal-content -->
-  </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
+{% endblock %}
+
+{% block script %}
+    <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.18/r-2.2.2/datatables.min.js"></script>
+    <script>
+        $(document).ready( function () {
+            $("table").DataTable();
+        });
+    </script>
 {% endblock %}

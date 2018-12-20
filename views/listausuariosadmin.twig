@@ -15,17 +15,13 @@
         <th>Nombre</th>
         <th>E-mail</th>
         <th>Rol</th>
-        <th>Creacion</th>
-        <th>Actualizacion</th>
         <th>Operaciones</th>
     </thead>
     {% for user in useradmin  %}
     <tbody>
         <td>{{ user.name }}</td>
         <td>{{ user.email }}</td>
-        <td>{{ user.rol_id }}</td>
-        <td>{{ user.created_at }}</td>
-        <td>{{ user.updated_at }}</td>
+        <td>{{ user.rol_id == 1 ? 'SuperAdmin' : 'Admin '}}</td>
         <td><a class="btn btn-primary" href="{{ path_for("usuario.editarusuariosadmin", {'id' : user.id}) }}">Editar</a> -
         <div class="btn-group">
                 <button type="button" class="btn btn-danger" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

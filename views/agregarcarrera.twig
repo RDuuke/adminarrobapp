@@ -1,0 +1,98 @@
+{% extends "template/base.twig" %}
+{% block content %}
+    <div class="row">
+        <div class="col-md 12 text-center">
+            <h3>
+                {% if carrera %}
+                    Actualizando la carrera {{ carrera.nombre }}
+                {% else %}
+                    creando una carrera
+                {% endif %}
+            </h3>
+            {% if carrera %}
+                <form action="{{ path_for('carrera.update', { codigo : carrera.codigo_snies }) }}" method="post">
+            {% else %}
+                <form action="{{ path_for('carrera.store') }}" method="post">
+            {% endif %}
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-6 text-left">
+                                <div class="form-group">
+                                    <label for="">Institución</label>
+                                    <select name="codigo_institucion" id="codigo_institucion" class="form-control" readonlyx|>
+                                        {% for university in universities %}
+                                            <option value="{{ university.codigo }}" {{ carrera.codigo_institucion == university.codigo ? "selected" : ""}}>{{ university.nombre }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="">Código SNIES</label>
+                                    <input type="text" class="form-control" name="codigo_snies" required value="{{ carrera ? carrera.codigo_snies : '' }}" {{ carrera ? 'readonly' : '' }}>
+                                </div>
+                                <div class="form-group">
+                                    <label for="">Basico conocimiento</label>
+                                    <select name="basico_de_conocimiento"  class="form-control" id="basico_de_conocimiento">
+                                        <option value="">Seleccione</option>
+                                        {% for basico in basicos %}
+                                            <option value="{{ basico.id }}" {{ carrera.basico_de_conocimiento == basico.id ? "selected" : ""}}>{{ basico.nombre }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="">Nombre</label>
+                                    <input type="text" class="form-control" name="nombre" required value="{{ carrera ? carrera.nombre : '' }}">
+                                </div>
+                                <div class="form-group">
+                                    <label for="">Nivel academico</label>
+                                    <select name="nivel_academico" class="form-control" id="nivel_academico">
+                                            <option value="">Seleccione</option>
+                                            <option value="PREGRADO" {{ carrera.nivel_academico == 'PREGRADO' ? 'selected' : ''}}>PREGRADO</option>
+                                            <option value="POSGRADO" {{ carrera.nivel_academico == 'POSGRADO' ? 'selected' : ''}}>POSGRADO</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="">Nivel Formación</label>
+                                    <input type="text" class="form-control" name="nivel_formacion" required value="{{ carrera ? carrera.nivel_formacion : '' }}">
+                                </div>
+                                <div class="form-group">
+                                    <label for="">Metodología</label>
+                                    <input type="text" class="form-control" name="metodologia" required value="{{ carrera ? carrera.metodologia : '' }}">
+                                </div>
+                            </div>
+                            <div class="col-md-6 text-right">
+                                <div class="form-group">
+                                    <label for="">Número de periodos</label>
+                                    <input type="number" class="form-control" name="numero_periodos_de_duracion" required value="{{ carrera ? carrera.numero_periodos_de_duracion : '' }}">
+                                </div>
+                                <div class="form-group">
+                                    <label for="">Duración de periodos</label>
+                                    <input type="text" class="form-control" name="periodos_de_duracion" required value="{{ carrera ? carrera.periodos_de_duracion : '' }}">
+                                </div>
+                                <div class="form-group">
+                                    <label for="">Titulo</label>
+                                    <input type="text" class="form-control" name="titulo" required value="{{ carrera ? carrera.titulo : '' }}">
+                                </div>
+                                <div class="form-group">
+                                    <label for="">Departamento oferta</label>
+                                    <input type="text" class="form-control" name="departamento_oferta_programa" value="{{ carrera ? carrera.departamento_oferta_programa : '' }}">
+                                </div>
+                                <div class="form-group">
+                                    <label for="">Municipio oferta</label>
+                                    <input type="text" class="form-control" name="municipio_oferta_programa" value="{{ carrera ? carrera.municipio_oferta_programa : '' }}">
+                                </div>
+                                <div class="form-group">
+                                    <label for="">Costo $</label>
+                                    <input type="text" class="form-control" name="costo_matricula" value="{{ carrera ? carrera.costo_matricula : '' }}">
+                                </div>
+                                <div class="form-group">
+                                    <label for="">Tiempo de admisión</label>
+                                    <input type="text" class="form-control" name="tiempo_admisiones_estudiantes" value="{{ carrera ? carrera.tiempo_admisiones_estudiantes : '' }}">
+                                </div>
+                            </div>
+                        </div>
+                        <button class="btn btn-primary">Guardar</button>
+                    </div>
+                </form>
+        </div>
+    </div>
+{% endblock %}
