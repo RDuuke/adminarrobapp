@@ -12,7 +12,7 @@ class University extends Model
     protected $table = "universidades";
     protected $fillable = ["codigo","nombre","tipo","sector","caracter_academico","departamento"
         ,"municipio","direccion","direccion_google_maps","telefono","estado","principal_seccional"
-        ,"web","logo_universidad"];
+        ,"web","logo_universidad", "latitud", "longitud"];
     public $timestamps = false;
 
     public function getSectorAttribute($value) {

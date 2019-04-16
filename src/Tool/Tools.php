@@ -38,4 +38,28 @@ class Tools
         die;
     }
 
+    static function geocode($address){
+
+        $context = stream_context_create(
+            array(
+                "http" => array(
+                    "header" => "User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.102 Safari/537.36"
+                )
+            )
+        );
+        // url encode the address
+        $address = urlencode($address);
+
+        $url = "http://nominatim.openstreetmap.org/?format=json&addressdetails=1&q={$address}&format=json&limit=1";
+
+        // get the json response
+        $resp_json = file_get_contents($url, false, $context);
+
+        // decode the json
+        $resp = json_decode($resp_json, true);
+
+        return array("latitud" => $resp[0]['lat'], "longitud" => $resp[0]['lon']);
+
+    }
+
 }
