@@ -46,6 +46,10 @@ class UploadArchives extends Controller
                     $data["principal_seccional"] = $v[3];
                     $data["web"] = $v[16];
                     $data["logo_universidad"] = "http://200.13.254.146/webserviceapp/img_ies/" . $v[0] . ".png";
+                    $geo = Tools::geocode($data["direccion"] . " antioquia");
+
+                    $data["latitud"] = $geo["latitud"];;
+                    $data["longitud"] = $geo["longitud"];
                     $university = University::updateOrCreate(["codigo" => $v[0]], $data);
                     if (($university instanceof University) == 1) {
                         $this->creators++;
