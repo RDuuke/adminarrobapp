@@ -7,9 +7,9 @@ return [
         'db' => [
             'driver' => 'mysql',
             'host' => 'localhost',
-            'database' => 'dbarrobapp',
-            'username' => 'arroba',
-            'password' => 'MXQ53105pn',
+            'database' => 'api_movil',
+            'username' => 'root',
+            'password' => '',
             'charset'   => 'utf8',
             'collation' => 'utf8_unicode_ci',
             'prefix'    => '',

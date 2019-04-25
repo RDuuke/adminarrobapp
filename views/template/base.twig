@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Adminarrobapp</title>
+
+
+
+    <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
+    <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.css" rel="stylesheet">
+    <link href="{{ base_url }}/public/css/metisMenu.css" rel="stylesheet">
+    <link href="{{ base_url }}/public/css/sb-admin-2.css" rel="stylesheet">
+    <link href="{{ base_url }}/public/css/font-awesome.css" rel="stylesheet" type="text/css">
+    {% block style %}{% endblock %}
+
+</head>
+
+{% if auth.check %}
+<body>
+
+    <div id="wrapper">
+
+        <!-- Navigation -->
+        <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+            <div class="navbar-header">
+                <img src="https://firebasestorage.googleapis.com/v0/b/adminapparrobamedellin.appspot.com/o/IMG%2Fic_launcher_icon-web.png?alt=media&token=828c26e5-576d-4c92-97c4-13b296fb76a6" alt="" height="50"width="50">
+                <a>Administrador APP @Medellín</a>
+                <!-- -->
+            </div>
+            <!-- /.navbar-header -->
+
+            <ul class="nav navbar-top-links navbar-right">
+                <!-- /.dropdown -->
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-user">
+                        <li><a href="#"><i class="fa fa-user fa-fw"></i><b>{{  auth.user.name }}</b></a>
+                        <!--/li>
+                        <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
+                        </li-->
+                        <li class="divider"></li>
+                        <li><a  href="{{ path_for('logout') }}"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                        </li>
+                    </ul>
+                    <!-- /.dropdown-user -->
+                </li>
+                <!-- /.dropdown -->
+            </ul>
+            <!-- /.navbar-top-links -->
+
+            <div class="navbar-default sidebar" role="navigation">
+                <div class="sidebar-nav navbar-collapse">
+                    <ul class="nav" id="side-menu">
+                        <li class="sidebar-search">
+                            <div class="input-group custom-search-form">
+                                <input type="text" class="form-control" placeholder="Search...">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-default" type="button">
+                                        <i class="fa fa-search"></i>
+                                    </button>
+                                </span>
+                            </div>
+                            <!-- /input-group -->
+                        </li>
+                        <li>
+                            <a href="/adminarrobapp/public/admin"><i class="fa fa-dashboard fa-fw"></i>Home</a>
+                        </li>
+
+                        {% if auth.check %}
+
+                         {% if auth.user.rol_id == 1 %}
+
+                        <li>
+                            <a href="#"><i class="fa fa-user fa-fw"></i>Usuarios Admin<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="{{ path_for('usuarioadmin.create') }}"><i class="fa fa-plus fa-fw"></i>Agregar usuario</a>
+                                </li>
+                                <li>
+
+                                    <a href="{{ path_for('usuarioadmin.list') }}"><i class="fa fa-th-list  s fa-fw"></i>Ver usuarios</a>
+                                </li>
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
+
+                       {% endif %}
+
+                        {% if auth.user.rol_id == 1 %}
+
+                        <li>
+                            <a href="#"><i class="fa fa-user fa-fw"></i>Usuarios App<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="{{ path_for('usuario.create') }}"><i class="fa fa-plus fa-fw"></i>Agregar usuario</a>
+                                </li>
+                                <li>
+                                    <a href="{{ path_for('usuario.list') }}"><i class="fa fa-th-list  s fa-fw"></i>Ver usuarios</a>
+                                </li>
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
+
+                       {% endif %}
+                       {% endif %}
+
+                        <li>
+                            <a href="#"><i class="fa  fa-tags fa-fw"></i>Novedades<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                              <li>
+                                  <a href="{{ path_for('usuario.createnovedad') }}"><i class="fa fa-plus fa-fw"></i>Agregar novedad</a>
+                              </li>
+                              <li>
+                                  <a href="{{ path_for('usuario.listnovedad') }}"><i class="fa fa-th-list  s fa-fw"></i>Ver Novedades</a>
+                              </li>
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
+
+
+
+                        {% if auth.check %}
+                            {% if auth.user.rol_id == 1 %}
+                                <li>
+                                    <a href="#"><i class="fa fa-book fa-fw"></i>Ofertas academicas<span class="fa arrow"></span></a>
+                                    <ul class="nav nav-second-level">
+                                        <li>
+                                            <a href="#"><i class="fa fa-plus fa-fw"></i>Universidades</a>
+                                            <ul class="nav nav-third-level">
+                                                <li>
+                                                    <a href="{{ path_for('universidad.list') }}">Listar</a>
+                                                    <a href="{{ path_for('universidad.create') }}">Agregar</a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li>
+                                            <a href="#"><i class="fa fa-th-list  s fa-fw"></i>Carreras</a>
+                                            <ul class="nav-third-level nav">
+                                                <li>
+                                                    <a href="{{ path_for('carrera.list') }}">Listar</a>
+                                                    <a href="{{ path_for('carrera.create') }}">Agregar</a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                    <!-- /.nav-second-level -->
+                                </li>
+                                <li class="active">
+                                    <a href="#"><i class="fa fa-wrench fa-fw"></i>Configuraciones<span class="fa arrow"></span></a>
+                                    <ul class="nav nav-second-level">
+                                        <li>
+                                            <a href="{{ path_for('database.universidades') }}"><i class="fa fa-th-list  s fa-fw"></i>Universidades</a>
+                                            <a href="{{ path_for('database.carreras') }}"><i class="fa fa-th-list  s fa-fw"></i>Carreras</a>
+                                        </li>
+                                    </ul>
+                                    <!-- /.nav-second-level -->
+                                </li>
+
+                            {% endif %}
+                        {% endif %}
+                    </ul>
+                </div>
+                <!-- /.sidebar-collapse -->
+            </div>
+            <!-- /.navbar-static-side -->
+        </nav>
+
+        <!-- Page Content -->
+        <div id="page-wrapper">
+            <div class="container-fluid">
+                        {% include 'template/partials/flash.twig' %}
+
+         {% block content %}{% endblock %}
+
+
+
+            </div>
+            <!-- /.container-fluid -->
+        </div>
+        <!-- /#page-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+
+    <!-- jQuery -->
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
+
+    <script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.js"></script>
+    {% block script %}{% endblock %}
+    <script src="{{ base_url }}/public/js/metisMenu.js"></script>
+    <script src="{{ base_url }}/public/js/sb-admin-2.js"></script>
+    <!-- include the texteditor script -->
+
+
+</body>
+
+{% endif %}
+{% if auth.user.rol_id != 1 %}
+{% if auth.user.rol_id != 2 %}
+{% if auth.user.rol_id != 3 %}
+{% if auth.user.rol_id != 4 %}
+<br>
+<br>
+<div class="container">
+    <div class="panel panel-danger">
+      <div class="panel-heading">
+            Danger Panel Error 404
+      </div>
+      <div class="panel-body">
+        <p>No hay un usuario autenticado.</p>
+      </div>
+      <div class="panel-footer">
+        <a href="/adminarrobapp/public">Login</a>
+      </div>
+    </div>
+</div>
+{% endif %}
+{% endif %}
+{% endif %}
+{% endif %}
+</html>
