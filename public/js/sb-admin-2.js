@@ -1,11 +1,18 @@
 $(function() {
     $('#side-menu').metisMenu();
     $('#sendMessageButton').on('click', function(e){
+<<<<<<< HEAD
         e.preventDefault();
         $("#formCreateNovedad").trigger('submit');
         /*$.get("http://servicios.arrobamedellin.edu.co/webserviceapp/firebase/send_push.php").done(function(r){
             $("#formCreateNovedad").trigger('submit');
         });*/
+=======
+      e.preventDefault();
+      $.get("http://200.13.254.146/webserviceapp/firebase/send_push.php").done(function(){
+        $("#formCreateNovedad").trigger('submit');
+      });
+>>>>>>> 2dcf4e3c9e268ee9b9983429fa294e8a1acc44b3
     });
 });
 
