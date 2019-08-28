@@ -1,7 +1,13 @@
 # JetBrains Rider
 .idea/
 *.sln.iml
+<<<<<<< HEAD
 /vendor
+=======
+
+
+/vendor/
+>>>>>>> add gitignore
 /resource/tmp
 bootstrap/
 /node_modules
