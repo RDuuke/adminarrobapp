@@ -76,10 +76,16 @@ class HomeController extends Controller
         return $this->view->render($response,'listausuariosadmin.twig',['useradmin' => $useradmin] );
     }
 
-    public function createdatabase(Request $request,Response $response)
+    public function updateBDcarreras(Request $request,Response $response)
     {
       # code...
-      return $this->view->render($response,'databasemanager.twig');
+      return $this->view->render($response,'databasecarreras.twig');
+    }
+
+    public function updateBDuniversidades(Request $request,Response $response)
+    {
+      # code...
+      return $this->view->render($response,'databaseuniversidades.twig');
     }
 
 

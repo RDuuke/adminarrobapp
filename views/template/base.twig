@@ -13,10 +13,12 @@
 
 
 
-    <link href="{{ base_url }}/css/bootstrap.css" rel="stylesheet">
-    <link href="{{ base_url }}/css/metisMenu.css" rel="stylesheet">
-    <link href="{{ base_url }}/css/sb-admin-2.css" rel="stylesheet">
-    <link href="{{ base_url }}/css/font-awesome.css" rel="stylesheet" type="text/css">
+    <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
+    <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.css" rel="stylesheet">
+
+    <link href="{{ base_url }}/adminarrobapp/public/css/metisMenu.css" rel="stylesheet">
+    <link href="{{ base_url }}/adminarrobapp/public/css/sb-admin-2.css" rel="stylesheet">
+    <link href="{{ base_url }}/adminarrobapp/public/css/font-awesome.css" rel="stylesheet" type="text/css">
 
 
 
@@ -72,7 +74,7 @@
                             <!-- /input-group -->
                         </li>
                         <li>
-                            <a href="/admin"><i class="fa fa-dashboard fa-fw"></i>Home</a>
+                            <a href="/adminarrobapp/public/admin"><i class="fa fa-dashboard fa-fw"></i>Home</a>
                         </li>
 
                         {% if auth.check %}
@@ -147,7 +149,8 @@
                             <a href="#"><i class="fa fa-wrench fa-fw"></i>Configuraciones<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="{{ path_for('database.create') }}"><i class="fa fa-th-list  s fa-fw"></i>Base de Datos</a>
+                                    <a href="{{ path_for('database.universidades') }}"><i class="fa fa-th-list  s fa-fw"></i>Universidades</a>
+                                    <a href="{{ path_for('database.carreras') }}"><i class="fa fa-th-list  s fa-fw"></i>Carreras universitarias</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->
@@ -180,10 +183,14 @@
     <!-- /#wrapper -->
 
     <!-- jQuery -->
-    <script src="{{ base_url }}/js/jquery.min.js"></script>
-    <script src="{{ base_url }}/js/bootstrap.js"></script>
-    <script src="{{ base_url }}/js/metisMenu.js"></script>
-    <script src="{{ base_url }}/js/sb-admin-2.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
+
+    <script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.js"></script>
+
+    <script src="{{ base_url }}/adminarrobapp/public/js/metisMenu.js"></script>
+    <script src="{{ base_url }}/adminarrobapp/public/js/sb-admin-2.js"></script>
+    <!-- include the texteditor script -->
 
 
 </body>
@@ -204,7 +211,7 @@
         <p>No hay un usuario autenticado.</p>
       </div>
       <div class="panel-footer">
-        <a href="/">Login</a>
+        <a href="/adminarrobapp/public">Login</a>
       </div>
     </div>
 </div>

@@ -30,9 +30,8 @@
                 <div class="form-group">
                     <label>Tipo novedad</label>
                         <select class="form-control" name="tipo_novedad" value="{{ novedad.tipo_novedad }}">
-                            <option value="1">Principal</option>
-                            <option value="2">Activa</option>
-                            <option value="3">Desactivada</option>
+                            <option value="2">Principal</option>
+                            <option value="1">Destacada</option>
                         </select>
                 </div>
               </div>
@@ -40,7 +39,7 @@
             <div class="control-group form-group">
               <div class="controls">
                 <label>Contenido:</label>
-                <textarea  id="txt-content" name="contenido" rows="10" cols="1000" class="form-control" id="message" maxlength="9999" style="resize:none" value="{{ novedad.contenido }}"></textarea>
+                <textarea  id="bodyField" name="contenido" rows="10" cols="1000" class="form-control" style="resize:none" value="{{ novedad.contenido }}"></textarea>
               </div>
             </div>
             <div class="form-group">

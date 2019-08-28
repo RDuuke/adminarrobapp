@@ -17,7 +17,8 @@ $app->get("/test", 'NovedadController:getAll');
   $this->get('/usuarios/editarusuarios/{id}','HomeController:editarusuarios')->setName('usuario.editarusuarios');
 
   //base de datos.
-  $this->get('/database/create','HomeController:createdatabase')->setName('database.create');
+  $this->get('/database/carreras','HomeController:updateBDcarreras')->setName('database.carreras');
+  $this->get('/database/universidades','HomeController:updateBDuniversidades')->setName('database.universidades');
 
   //usuarios admin
   $this->get('/usuariosadmin/create','HomeController:createadmin')->setName('usuarioadmin.create');

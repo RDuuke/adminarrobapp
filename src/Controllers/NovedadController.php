@@ -8,32 +8,25 @@ use Slim\Http\Request;
 use Slim\Http\Response;
 
 class NovedadController extends Controller
-{ 
+{
 
 
     public function insertar(Request $request,Response $response)
     {
-        /*
-        $validation = $this->validation->validate($request, [
-            "name" => v::notEmpty()->alpha(),
-            "email" => v::notEmpty()->email()->noWhitespace()->emailAvailable(),
-            "password" => v::notEmpty()->noWhitespace()
-        ]);
-        if ($validation->failed()) {
-            return $response->withRedirect($this->router->pathFor("user.create"));
-        }
-        */
+
         $files = $request->getUploadedFiles();
         $imagen = $files['imagen'];
+        $imagen->moveTo(DIR_IMG . "img_novedades" . DS . $imagen->getClientFilename());
+
+
         Novedades::create([
-            "imagen" => $imagen->getClientFilename(),
+            "imagen" => 'http://200.13.254.146/webserviceapp/img_novedades/'.$imagen->getClientFilename(),
             "titulo" => $request->getParam("titulo"),
             "contenido" =>$request->getParam("contenido"),
             "resumen" => $request->getParam("resumen"),
             "link" => $request->getParam("link"),
             "tipo_novedad" => $request->getParam("tipo_novedad")
         ]);
-        // @TODO refactorizar
         $this->flash->addMessage("info", "Novedad registrada");
 
         return $response->withRedirect($this->router->pathFor("usuario.listnovedad"));
@@ -73,7 +66,7 @@ class NovedadController extends Controller
         return $response->withRedirect($this->router->pathFor('usuario.listnovedad'));
     }
 
- 
-    
+
+
 
 }

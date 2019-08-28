@@ -18,14 +18,15 @@ use App\Auth\Auth;
 
 $app = new App([
     'settings' => [
-        'determineRouteBeforeAppMiddeware' => false,
+        'determineRouteBeforeAppMiddleware' => true,
         'displayErrorDetails' => true,
+        'addContentLengthHeader' => false,
     'db' => [
             'driver' => 'mysql',
             'host' => 'localhost',
             'database' => 'dbarrobapp',
-            'username' => 'root',
-            'password' => 'diego950',
+            'username' => 'arroba',
+            'password' => 'MXQ53105pn',
             'charset'   => 'utf8',
             'collation' => 'utf8_unicode_ci',
             'prefix'    => '',
@@ -70,7 +71,7 @@ $container['view'] = function ($container) {
 
     $view->getEnvironment()->addGlobal('flash', $container->flash);
 
-  
+
 
     return $view;
 };

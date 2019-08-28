@@ -8,7 +8,7 @@ use Slim\Http\Request;
 use Slim\Http\Response;
 
 class UserController extends Controller
-{ 
+{
 
 
     public function insertar(Request $request,Response $response)
@@ -24,9 +24,9 @@ class UserController extends Controller
         }
         */
        UserApp::create([
-            "nombre" => $request->getParam("nombre"),
+            "name" => $request->getParam("name"),
             "email" => $request->getParam("email"),
-            "password" => md5($request->getParam("password")),
+            "encrypted_password" => base64_encode($request->getParam("encrypted_password")),
             "avatar" => $request->getParam("avatar"),
             "estado" => $request->getParam("estado"),
             "terminos_condiciones" => $request->getParam("terminos_condiciones")
@@ -45,7 +45,7 @@ class UserController extends Controller
 
     }
 
-  
+
     public function update(Request $request,Response $response)
     {
         $router = $request->getAttribute('route');
