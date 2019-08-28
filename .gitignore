@@ -1,0 +1,9 @@
+# JetBrains Rider
+.idea/
+*.sln.iml
+
+
+/vendor/
+/resource/tmp
+bootstrap/
+/node_modules
