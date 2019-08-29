@@ -6,6 +6,8 @@ $(function() {
         /*$.get("http://servicios.arrobamedellin.edu.co/webserviceapp/firebase/send_push.php").done(function(r){
             $("#formCreateNovedad").trigger('submit');
         });*/
+
+        
     });
 });
 
